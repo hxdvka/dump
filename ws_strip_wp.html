@@ -18,7 +18,8 @@ input {
 }
 </style>
 </head>
-<body onload="loadWebSocket()">
+<!-- <body onload="loadWebSocket()"> -->
+<body>
 <form id="the-form" action="/post" accept-charset="utf-8">
 <label for="user-text">Make a guess:</label>
 <input type="text" id="user-text" name="user_text"><br>
@@ -63,7 +64,7 @@ theForm.addEventListener("submit", async (e) => {
 
     ws.send(userText.value);
 });
-
+setTimeout(loadWebSocket,5000)
 </script>
 </body>
 </html>
