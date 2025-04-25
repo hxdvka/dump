@@ -18,7 +18,10 @@ async function v2(){
     let wpg = await fetch("https://raw.githubusercontent.com/hxdvka/dump/refs/heads/main/hate.html");
     // let wpg = await fetch("./hate.html");
     let tx = await wpg.text();
-    document.getElementById("gin").innerHTML= tx;}
+    document.getElementById("gin").innerHTML= tx;
+    setInterval(plt_update(),500);
+  }
+
     //plt_draw();
 
 v2();    
@@ -51,10 +54,7 @@ function loadWebSocket() {
         if (logging){
         mem.push([count,e.data,tag]);
         count+=1;
-        if(count%20 == 0){
-          plt_update();
         }
-      }
     };
 }
 
@@ -85,8 +85,9 @@ function plt_update_t(){
           b=  1+b;
           console.log(b);
           console.log(mem);
-        }
-        function plt_update(){
+}
+
+function plt_update(){
           
           plot_win = document.getElementById("mit_flow");
  let act_tag = document.getElementById("tag0").value;
@@ -97,16 +98,16 @@ function plt_update_t(){
     { //datarevision : b,
       margin: { t: 0 } } );
       
-    }
+}
     
     // data manipulation
-    function log_toggle(){
+function log_toggle(){
       logging = !logging;
       s = Number(document.getElementById("log_timeout").value);
       if (logging && s>0){
         setTimeout(()=>{logging=false},s*1000);
       }
-    }
+}
 
     function stash(){
       logging = false;

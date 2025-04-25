@@ -6,7 +6,7 @@
 </h1>
 
     <!-- <input type="button" value="filthy humans" onclick="yo()"> -->
-    <div>
+    <div style="display: flow-root;">
         <label for="tag0">Data tag:</label>
         <input type="text" name="tag" id="tag0" value="metalu upa">
         <label for="log_timeout">Logging time [s]:</label>
@@ -17,7 +17,7 @@
     <input type="button" value="test data" onclick="plt_update()"></button>
 
 <!-- data buttons -->
-<div style="display: inline-block;">
+<div style="display:  -webkit-flex;">
     <input type="button" value="log"    onclick="log_toggle()">
     <input type="button" value="stash"  onclick="stash()">
     <input type="button" value="clear"  onclick="">
@@ -26,7 +26,7 @@
     
     <a id="url" href="" download="super_sensor_data.csv" hidden="true" >download csv</a>
 
-    <div id="mit_flow" >
-        <canvas id="graphhh" ></canvas>
+    <div id="mit_flow" style="width: max-content; min-height: 25%;">
+        <!-- <canvas id="graphhh" ></canvas> -->
     </div>
 
