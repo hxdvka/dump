@@ -1,11 +1,8 @@
 
-console.log([[1,2],[3,4],5].join(' '))
-tss = [[[1,2],[3,4],[5,6],[7,8]],[[1,2],[3,4],[5,6],[7,8]],[[1,2],[3,4],[5,6],[7,8]]]
-console.log( into_csv(tss)
-  )
+let ws;
 //setup context stuff
 let tag = 'raw_adc';
-let mem = [[1,2,'tag'],[13,5,'t2']]; 
+let mem = []; 
 let memhl =[];
 let count = 0;
 let b = 0;
@@ -14,8 +11,9 @@ let logging = false;
 function yo(){
     
     console.log("fkn tryhard biatch")
-}    
+  }    
 async function v2(){
+    console.log("fkn tryhard biatch v2")
     
     let wpg = await fetch("https://raw.githubusercontent.com/hxdvka/dump/refs/heads/main/hate.html");
     // let wpg = await fetch("./hate.html");
@@ -38,25 +36,28 @@ function rst_cnt(){
 
 // setup websocket stuff
 
-let ws;
 function loadWebSocket() {
     console.log('in');
     ws = new WebSocket(`ws://${window.location.host}/ws`);
     ws.onopen = function(e) {
-        submitButton.disabled = false;
+        //submitButton.disabled = false;
     };
     ws.onclose = ws.onerror = function(e) {
-        submitButton.disabled = true;
+        //submitButton.disabled = true;
     };
     ws.onmessage = function(e) {
         console.log(e.data);
-        serverResp.innerText = e.data;
+        //serverResp.innerText = e.data;
         if (logging){
-        mem[mem.length] = [count,e.data,tag];
+        mem.push([count,e.data,tag]);
         count+=1;
+        if(count%20 == 0){
+          plt_update();
+        }
       }
     };
 }
+
 
 function plt_draw(){
   console.log("drawww");
@@ -67,36 +68,48 @@ function plt_draw(){
       datarevision : 0,
       margin: { t: 0 } } );
     }
-
+    
     // datarevision
-
-function plt_update(){
-
-  plot_win = document.getElementById("mit_flow");
-  let act_tag = document.getElementById("tag0").value;
-  mem.push([Math.random()*10, Math.random()*100,act_tag]);
+    
+function plt_update_t(){
+      
+      plot_win = document.getElementById("mit_flow");
+      let act_tag = document.getElementById("tag0").value;
+      mem.push([Math.random()*10, Math.random()*100,act_tag]);
+      Plotly.react(plot_win ,  [{
+        x: mem.map((dp) => dp[0]),
+        y: mem.map((dp) => dp[1]) }], 
+        { //datarevision : b,
+          margin: { t: 0 } } );
+          
+          b=  1+b;
+          console.log(b);
+          console.log(mem);
+        }
+        function plt_update(){
+          
+          plot_win = document.getElementById("mit_flow");
+ let act_tag = document.getElementById("tag0").value;
+  //mem.push([Math.random()*10, Math.random()*100,act_tag]);
   Plotly.react(plot_win ,  [{
     x: mem.map((dp) => dp[0]),
     y: mem.map((dp) => dp[1]) }], 
     { //datarevision : b,
       margin: { t: 0 } } );
       
-      b=  1+b;
-      console.log(b);
-      console.log(mem);
-}
+    }
+    
+    // data manipulation
+    function log_toggle(){
+      logging = !logging;
+      s = Number(document.getElementById("log_timeout").value);
+      if (logging && s>0){
+        setTimeout(()=>{logging=false},s*1000);
+      }
+    }
 
-// data manipulation
-function log_toggle(){
-  logging = !logging;
-  s = Number(document.getElementById("log_timeout").value);
-  if (logging && s>0){
-    setTimeout(()=>{logging=false},s*1000);
-  }
-}
-
-function stash(){
-  logging = false;
+    function stash(){
+      logging = false;
   memhl.push( mem);
   mem = [];
 }
@@ -148,3 +161,6 @@ function draw_old(){
     }
   });
 }
+
+loadWebSocket()
+//window.onload(setInterval(plt_update(),500));
