@@ -1,4 +1,4 @@
-let ver = 0;
+let ver = 0.01;
 let ws;
 //setup context stuff
 let tag = 'raw_adc';
@@ -20,10 +20,10 @@ async function v2(){
     let tx = await wpg.text();
     document.getElementById("gin").innerHTML= tx;
     document.getElementById("vcont").innerHTML+=(ver);
+    plt_draw();
     setInterval(plt_update,500);
   }
 
-    //plt_draw();
 
 v2();    
 yo();
@@ -65,27 +65,21 @@ function plt_draw(){
   plot_win = document.getElementById("mit_flow");
   Plotly.newPlot (plot_win ,  [{
     x: mem.map((dp) => dp[0]),
-    y: mem.map((dp) => dp[1]) }], {
+    y: mem.map((dp) => dp[1]) }], 
+    {
       datarevision : 0,
-      margin: { t: 0 } } );
+      margin: { t: 0 },
+      yaxis: {
+        range : [0,4095]}}  );
     }
     
     // datarevision
     
 function plt_update_t(){
-      
-      plot_win = document.getElementById("mit_flow");
-      let act_tag = document.getElementById("tag0").value;
+      act_tag = document.getElementById("tag0").value;
       mem.push([Math.random()*10, Math.random()*100,act_tag]);
-      Plotly.react(plot_win ,  [{
-        x: mem.map((dp) => dp[0]),
-        y: mem.map((dp) => dp[1]) }], 
-        { //datarevision : b,
-          margin: { t: 0 } } );
-          
-          b=  1+b;
-          console.log(b);
-          console.log(mem);
+      console.log(b);
+      console.log(mem);
 }
 
 function plt_update(){
@@ -97,7 +91,10 @@ function plt_update(){
   x: mem.map((dp) => dp[0]),
   y: mem.map((dp) => dp[1]) }], 
   { //datarevision : 0,
-      margin: { t: 0 } } );
+      margin: { t: 0 } ,
+      yaxis: {
+        range : [0,4095]} 
+    });
 }
 
 function plt_updatex(){
@@ -109,7 +106,9 @@ function plt_updatex(){
   x: mem.map((dp) => dp[0]),
   y: mem.map((dp) => dp[1]) }], 
   { datarevision : 1,
-      margin: { t: 0 } } );
+      margin: { t: 0 } ,
+      yaxis: {
+        range : [0,4095]} } );
 }
     
     // data manipulation
@@ -132,14 +131,14 @@ function stash(){
 }
 
 function into_bloburl(data){
-  bl = new Blob(data,{type: "text/csv",endings:"native"});
+  bl = new Blob([data],{type: "text/csv",endings:"native"});
   url = URL.createObjectURL(bl);
   return url;
 }
 
 function into_csv(d_in){
   //return d_in.map((memi)=>memi.join('\\n')).join('\\n');
-  return d_in.map((memi)=>memi.join("\n"));
+  return d_in.map((memi)=>memi.join("\n")).join("\n");
 }
 function export_csv(){
   stash();
