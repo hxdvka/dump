@@ -1,4 +1,4 @@
-
+let ver = 0;
 let ws;
 //setup context stuff
 let tag = 'raw_adc';
@@ -19,6 +19,7 @@ async function v2(){
     // let wpg = await fetch("./hate.html");
     let tx = await wpg.text();
     document.getElementById("gin").innerHTML= tx;
+    document.getElementById("vcont").innerHTML+=(ver);
     setInterval(plt_update,500);
   }
 
@@ -52,8 +53,8 @@ function loadWebSocket() {
         console.log(e.data);
         //serverResp.innerText = e.data;
         if (logging){
-        mem.push([count,e.data,tag]);
-        count+=1;
+          mem.push([count,e.data,tag]);
+          count+=1;
         }
     };
 }
@@ -125,6 +126,7 @@ function stash(){
   logging = false;
   memhl.push( mem);
   mem = [];
+  rst_cnt();
   plt_updatex();
 
 }
@@ -152,6 +154,7 @@ function export_csv(){
 function clear_curr(){
   logging = false;
   mem = [];
+  rst_cnt();
   plt_updatex();
 
 }
