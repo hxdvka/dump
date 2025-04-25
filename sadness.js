@@ -19,8 +19,7 @@ async function v2(){
     // let wpg = await fetch("./hate.html");
     let tx = await wpg.text();
     document.getElementById("gin").innerHTML= tx;
-    setInterval(plt_update_t,500);
-    
+    setInterval(plt_update,500);
   }
 
     //plt_draw();
@@ -90,15 +89,26 @@ function plt_update_t(){
 
 function plt_update(){
           
-          plot_win = document.getElementById("mit_flow");
- let act_tag = document.getElementById("tag0").value;
+  plot_win = document.getElementById("mit_flow");
+  let act_tag = document.getElementById("tag0").value;
   //mem.push([Math.random()*10, Math.random()*100,act_tag]);
   Plotly.react(plot_win ,  [{
-    x: mem.map((dp) => dp[0]),
-    y: mem.map((dp) => dp[1]) }], 
-    { //datarevision : b,
+  x: mem.map((dp) => dp[0]),
+  y: mem.map((dp) => dp[1]) }], 
+  { //datarevision : 0,
       margin: { t: 0 } } );
-      
+}
+
+function plt_updatex(){
+          
+  plot_win = document.getElementById("mit_flow");
+  let act_tag = document.getElementById("tag0").value;
+  //mem.push([Math.random()*10, Math.random()*100,act_tag]);
+  Plotly.react(plot_win ,  [{
+  x: mem.map((dp) => dp[0]),
+  y: mem.map((dp) => dp[1]) }], 
+  { datarevision : 1,
+      margin: { t: 0 } } );
 }
     
     // data manipulation
@@ -108,12 +118,15 @@ function log_toggle(){
       if (logging && s>0){
         setTimeout(()=>{logging=false},s*1000);
       }
+
 }
 
 function stash(){
   logging = false;
   memhl.push( mem);
   mem = [];
+  plt_updatex();
+
 }
 
 function into_bloburl(data){
@@ -139,6 +152,8 @@ function export_csv(){
 function clear_curr(){
   logging = false;
   mem = [];
+  plt_updatex();
+
 }
 
 //deprecated > for reference only
