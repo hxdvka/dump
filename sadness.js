@@ -19,7 +19,8 @@ async function v2(){
     // let wpg = await fetch("./hate.html");
     let tx = await wpg.text();
     document.getElementById("gin").innerHTML= tx;
-    setInterval(plt_update(),500);
+    setInterval(plt_update_t,500);
+    
   }
 
     //plt_draw();
@@ -109,8 +110,8 @@ function log_toggle(){
       }
 }
 
-    function stash(){
-      logging = false;
+function stash(){
+  logging = false;
   memhl.push( mem);
   mem = [];
 }

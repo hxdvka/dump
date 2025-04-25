@@ -10,17 +10,17 @@
         <label for="tag0">Data tag:</label>
         <input type="text" name="tag" id="tag0" value="metalu upa">
         <label for="log_timeout">Logging time [s]:</label>
-        <input type="number" name="lto_s" id="log_timeout">
+        <input type="number" name="lto_s" id="log_timeout" value="0">
     </div>
     <!-- graph, log toggle ,  -->
     
-    <input type="button" value="test data" onclick="plt_update()"></button>
+    <input type="button" value="test data" onclick="plt_update_t()"></button>
 
 <!-- data buttons -->
 <div style="display:  -webkit-flex;">
     <input type="button" value="log"    onclick="log_toggle()">
     <input type="button" value="stash"  onclick="stash()">
-    <input type="button" value="clear"  onclick="">
+    <input type="button" value="clear"  onclick="clear_curr()">
     <input type="button" value="export" onclick="export_csv()">
 </div>
     
