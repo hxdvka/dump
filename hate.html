@@ -1,24 +1,30 @@
-<h1>
-    bug 
+<div style="display: flex; flex-direction: column; justify-items: center; align-items: center;" >
+
+    <h1>
+        bug
 </h1>
 
 <!-- <input type="button" value="filthy humans" onclick="yo()"> -->
-<div style="display: flow-root;">
+<div >
     <label for="tag0">Data tag:</label>
     <input type="text" name="tag" id="tag0" value="metalu upa">
     <label for="log_timeout">Logging time [s]:</label>
     <input type="number" name="lto_s" id="log_timeout" value="0">
 </div>
-<!-- graph, log toggle ,  -->
-<div style="display: block; margin: 1pc;">
-    <input class="waves-effect waves-light btn" type="button" value="test data" onclick="plt_update_t()"></button>
 </div>
 
-
-<!-- data buttons -->
-<div style="align-items: stretch; display: run-in;margin: 1pc;">
-
-    <input class="waves-effect waves-light btn" type="button" value="log"    onclick="log_toggle()">
+<div style="display: flex; flex-direction: column; justify-items: center; align-items: center;">
+    
+    <!-- graph, log toggle ,  -->
+    <div style="display: block; margin: 1pc;">
+        <input class="waves-effect waves-light btn" type="button" value="test data" onclick="plt_update_t()"></button>
+    </div>
+    
+    
+    <!-- data buttons -->
+    <div style="align-items: stretch; display: run-in;margin: 1pc;">
+        
+        <input class="waves-effect waves-light btn" type="button" value="log"    onclick="log_toggle()">
     <input class="waves-effect waves-light btn" type="button" value="stash"  onclick="stash()">
     <input class="waves-effect waves-light btn" type="button" value="clear"  onclick="clear_curr()">
     <input class="waves-effect waves-light btn" type="button" value="export" onclick="export_csv()">
@@ -27,6 +33,20 @@
 <a id="url" href="" download="super_sensor_data.csv" hidden="true" >download csv</a>
 
 <div id="mit_flow" style="width: max-content; min-height: 25%;">
+</div>
+
+<div>
+    <form action="/timing" method="post">
+        <input type="number" name="h" id="h" value="1000">
+        <label for="h"> t high</label>
+        <input type="number" name="l" id="l" value="2000">
+        <label for="l"> t low</label>
+        <br>
+        <input class="waves-effect waves-light btn" type="submit" value="update timings">
+
+    </form>
+</div>
+    
     <!-- <canvas id="graphhh" ></canvas> -->
 </div>
 

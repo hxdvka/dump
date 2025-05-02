@@ -1,5 +1,5 @@
 let ws;
-//setup context stuff
+//setup context stuff | js v: 0
 let tag = 'raw_adc';
 let mem = []; 
 let memhl =[];
