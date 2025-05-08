@@ -19,6 +19,11 @@ let plt_layout = {
 
 
 
+function ajxupd(){
+  req = "/hl?"+document.getElementById("h").value + '&' + document.getElementById("l").value;
+  console.log(req);
+  xhttp.open("GET",req,true);
+}
 
 async function setup_logger(){
   loadWebSocket();
@@ -79,7 +84,7 @@ function plt_draw(){
   plot_win = document.getElementById("mit_flow");
   Plotly.newPlot (plot_win ,  [{
     x: mem.map((dp) => dp[0]),
-    y: mem.map((dp) => dp[1]) }], 
+    y: mem.map((dp) => dp[1].split(",")[1]) }], 
     {template : template} );
     }
     
@@ -87,7 +92,8 @@ function plt_draw(){
     
 function plt_update_t(){
       //act_tag = document.getElementById("tag0").value;
-      mem.push([Math.random()*100, (Math.random()*10000) %4095,tag]);
+      yyy = "123," +(Math.random()*10000) %4095;
+      mem.push([Math.random()*100, yyy,tag]);
       console.log(b, tag);
       console.log(mem);
 }
@@ -98,7 +104,7 @@ function plt_update(){
   plt_layout.datarevision = !plt_layout.datarevision
   Plotly.react(plot_win ,  [{
   x: mem.map((dp) => dp[0]),
-  y: mem.map((dp) => dp[1]) }], 
+  y: mem.map((dp) => dp[1].split(",")[1]) }], 
   {template : template});
 }
     

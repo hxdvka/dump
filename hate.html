@@ -24,7 +24,7 @@
     <!-- data buttons -->
     <div style="align-items: stretch; display: run-in;margin: 1pc;">
         
-        <input class="waves-effect waves-light btn" type="button" value="log"    onclick="log_toggle()">
+    <input class="waves-effect waves-light btn" type="button" value="log"    onclick="log_toggle()">
     <input class="waves-effect waves-light btn" type="button" value="stash"  onclick="stash()">
     <input class="waves-effect waves-light btn" type="button" value="clear"  onclick="clear_curr()">
     <input class="waves-effect waves-light btn" type="button" value="export" onclick="export_csv()">
@@ -32,17 +32,17 @@
 
 <a id="url" href="" download="super_sensor_data.csv" hidden="true" >download csv</a>
 
-<div id="mit_flow" style="width: max-content; min-height: 25%;">
+<div id="mit_flow" style="width: fit-content; min-height: 25%; max-width: 75%;">
 </div>
 
 <div>
-    <form action="/timing" method="post">
+    <form action="/hl" method="get">
         <input type="number" name="h" id="h" value="1000">
         <label for="h"> t high</label>
         <input type="number" name="l" id="l" value="2000">
         <label for="l"> t low</label>
         <br>
-        <input class="waves-effect waves-light btn" type="submit" value="update timings">
+        <input class="waves-effect waves-light btn" type="button" value="update timings" onclick="ajxupd()">
 
     </form>
 </div>
